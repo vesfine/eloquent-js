@@ -123,3 +123,5 @@ function goalOrientedRobot({place, parcels}, route) {
     }
     return {direction: route[0], memory: route.slice(1)};
 }
+
+runRobot(VillageState.random(), goalOrientedRobot, mailRoute);
