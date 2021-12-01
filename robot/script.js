@@ -50,11 +50,6 @@ let first = new VillageState(
     [{place: "Почта", address: "Дом Алисы"}]
 );
 
-let next = first.move("Дом Алисы");
-console.log(next.place);
-console.log(next.parcels);
-console.log(first.place);
-
 function runRobot(state, robot, memory) {
     for (let turn = 0;; turn++) {
         if (state.parcels.length == 0) {
@@ -90,4 +85,16 @@ VillageState.random = function(parcelCount = 5) {
     return new VillageState("Почта", parcels);
 };
 
-runRobot(VillageState.random(), randomRobot);
+const mailRoute = [
+    "Дом Алисы", "Сарай", "Дом Алисы", "Дом Боба",
+    "Ратуша", "Дом Дарии", "Дом Эрни",
+    "Дом Греты", "Магазин", "Дом Греты", "Ферма",
+    "Рынок", "Почта"
+];
+
+function routeRobot(state, memory) {
+    if (memory.length == 0) {
+        memory = mailRoute;
+    }
+    return {direction: memory[0], memory: memory.slice(1)};
+}
